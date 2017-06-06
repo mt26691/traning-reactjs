@@ -3,6 +3,7 @@
 */
 import React from 'react';
 import ReactDom from 'react-dom';
+import RepoList from './RepoList';
 
 export default class Profile extends React.Component {
   render() {
@@ -63,6 +64,10 @@ export default class Profile extends React.Component {
                     </li>
                   </ul>
                 </div>
+                <hr/>
+
+                <h3>User Repositories</h3>
+                <RepoList userRepos={this.props.userRepos}/>
               </div>
             </div>
           </div>
