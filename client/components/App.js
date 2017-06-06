@@ -6,6 +6,7 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import Profile from './github/Profile';
 import RepoList from './github/RepoList';
+import Search from './github/Search';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends React.Component {
       userRepo: [],
       perPage: 5
     }
+    this.searchRepo = this.searchRepo.bind(this);
   }
 
   getUserData() {
@@ -58,9 +60,18 @@ class App extends React.Component {
     this.getUserData();
     this.getUserRepos();
   }
+
+  searchRepo(name) {
+      this.setState({ username: name },function(){
+        this.getUserData();
+        this.getUserRepos();
+      });
+  }
+
   render() {
     return (
       <div>
+        <Search search={this.searchRepo}/>
         <Profile {...this.state} />
       </div>);
   }
