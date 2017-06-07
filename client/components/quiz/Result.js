@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import RepoList from './RepoList';
 
-export default class Profile extends React.Component {
+export default class Result extends React.Component {
   render() {
     return (
       <div className="panel panel-default">
