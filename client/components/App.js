@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
 import SearchFrom from './movie/SearchForm';
+import MovieResults from './movie/MovieResults';
 
 function getAppState() {
   return {
@@ -42,6 +43,9 @@ class App extends React.Component {
     return (
       <div>
         <SearchFrom />
+        {this.state.movies != null &&
+          <MovieResults movies={this.state.movies} />
+        }
       </div>);
   }
   _onChange() {
