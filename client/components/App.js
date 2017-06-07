@@ -6,12 +6,11 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
-import SearchFrom from './movie/SearchForm';
-import MovieResults from './movie/MovieResults';
+import AddForm from './contact/AddForm';
 
 function getAppState() {
   return {
-    movies: appStore.getMovieResults()
+    contacts: appStore.getContacts()
   }
 }
 class App extends React.Component {
@@ -37,15 +36,10 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("search1");
-    console.log(this.state.movies);
-    console.log("search");
+    
     return (
       <div>
-        <SearchFrom />
-        {this.state.movies != null &&
-          <MovieResults movies={this.state.movies} />
-        }
+        <AddForm />
       </div>);
   }
   _onChange() {

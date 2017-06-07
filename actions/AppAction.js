@@ -2,14 +2,14 @@ var appDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 
 var AppActions = {
-    searchMovies: function (movie) {
+    saveContact: function (contact) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.SEARCH_MOVIES,
-            movie: movie
+            actionType: AppConstants.SAVE_CONTACT,
+            contact: contact
         })
     },
     receiveMovieResults: function (movies) {
-         appDispatcher.handleViewAction({
+        appDispatcher.handleViewAction({
             actionType: AppConstants.RECEIVED_MOVIES,
             movies: movies
         })

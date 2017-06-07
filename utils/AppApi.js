@@ -1,7 +1,7 @@
 var AppActions = require("../actions/AppAction");
 
 module.exports = {
-    searchMovies: function (movie) {
+    saveContact: function (contact) {
         $.ajax({
             url: "http://www.omdbapi.com/?apikey=ae6969ba&s=" + movie.title,
             dataType: "json",

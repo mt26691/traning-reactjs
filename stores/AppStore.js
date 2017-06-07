@@ -7,15 +7,15 @@ var AppApi = require('../utils/AppApi');
 
 var CHANGE_EVENT = 'change';
 
-var _movies = [];
+var _contacts = [];
 var _selected = '';
 
 var AppStore = assign({}, EventEmiiter.prototype, {
-    setMovieResults: function (movies) {
-        _movies = movies;
+    saveContact: function (contact) {
+        _contacts.push(contact);
     },
-    getMovieResults:function(){
-        return _movies;
+    getContacts: function () {
+        return _contacts;
     },
     emitChange: function () {
         this.emit(CHANGE_EVENT);
@@ -32,8 +32,9 @@ appDispatcher.register(function (payload) {
     var action = payload.action;
 
     switch (action.actionType) {
-        case AppConstants.SEARCH_MOVIES:
-            AppApi.searchMovies(action.movie);
+        case AppConstants.SAVE_CONTACT:
+            AppStore.saveContact(action.contact);
+            // AppApi.saveContact(action.contact);
             AppStore.emit(CHANGE_EVENT);
             break;
         case AppConstants.RECEIVED_MOVIES:
