@@ -6,6 +6,7 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
+import SearchFrom from './movie/SearchForm';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <SearchFrom />
       </div>);
   }
 }
