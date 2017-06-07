@@ -8,10 +8,10 @@ var AppActions = {
             contact: contact
         })
     },
-    receiveMovieResults: function (movies) {
+    receivedContact: function (contacts) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.RECEIVED_MOVIES,
-            movies: movies
+            actionType: AppConstants.RECEIVED_CONTACTS,
+            contacts: contacts
         })
     }
 };

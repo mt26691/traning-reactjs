@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
 import AddForm from './contact/AddForm';
+import AppApi from '../../utils/AppApi';
 
 function getAppState() {
   return {
@@ -20,6 +21,7 @@ class App extends React.Component {
   }
   constructor(props) {
     super(props);
+    AppApi.getContacts();
     this.state = {
 
     };
@@ -36,7 +38,7 @@ class App extends React.Component {
   }
 
   render() {
-    
+
     return (
       <div>
         <AddForm />
