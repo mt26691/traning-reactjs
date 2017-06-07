@@ -5,13 +5,13 @@ import registerServiceWorker from './registerServiceWorker';
 import Clock from './Clock';
 import ConditionRendering from './ConditionRendering';
 import DisplayList from './DisplayList';
+import BoilWater from './BoilWater';
+import Calculator from './Calculator';
 
 ReactDOM.render(
     <div>
-        <DisplayList />
-        <Clock />
-        <ConditionRendering />
         <Welcome name="bimbim" />
+        <Calculator />
     </div>
     , document.getElementById('root'));
 registerServiceWorker();
