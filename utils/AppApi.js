@@ -11,16 +11,11 @@ var app = firebase.initializeApp({
 
 module.exports = {
     saveContact: function (contact) {
-        var db = app.database();
-        var ref = db.ref("contacts");
-        var newPostRef = ref.push();
-
-        newPostRef.push(contact);
+        var ref = app.database().ref("contacts");
+        var newPostRef = ref.push(contact);
     },
     getContacts: function () {
-        var db = app.database();
-        var ref = db.ref("contacts");
-
+        var ref = app.database().ref("contacts");
         ref.on("value", function (snapshot) {
             var contacts = [];
             snapshot.forEach(function (childSnapshot) {
@@ -32,12 +27,14 @@ module.exports = {
                 };
                 contacts.push(contact);
             });
-            console.log(contacts);
             AppActions.receivedContact(contacts);
-
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
 
-    }
+    },
+    removeContact: function (id) {
+        var ref = app.database().ref("contacts");
+        ref.child(id).remove();
+    },
 }

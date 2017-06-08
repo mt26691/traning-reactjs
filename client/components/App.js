@@ -7,23 +7,15 @@ import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
 import AddForm from './contact/AddForm';
+import ContactList from './contact/ContactList';
 import AppApi from '../../utils/AppApi';
 
-function getAppState() {
-  return {
-    contacts: appStore.getContacts()
-  }
-}
 class App extends React.Component {
 
-  getInitalState() {
-    return getAppState();
-  }
   constructor(props) {
     super(props);
-    AppApi.getContacts();
     this.state = {
-
+      contacts: appStore.getContacts()
     };
 
     this._onChange = this._onChange.bind(this);
@@ -42,10 +34,13 @@ class App extends React.Component {
     return (
       <div>
         <AddForm />
+        {this.state.contacts && <ContactList contacts={this.state.contacts} />}
       </div>);
   }
   _onChange() {
-    this.setState(getAppState);
+    this.setState({
+      contacts: appStore.getContacts()
+    });
   }
 }
 
