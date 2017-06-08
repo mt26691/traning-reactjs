@@ -13,8 +13,8 @@ export default class Movie extends React.Component {
     // this.handleEdit = this.handleEdit.bind(this);
     // this.handleDelete = this.handleDelete.bind(this);
   }
-  handleEdit(e) {
-    console.log(e);
+  handleEdit(i) {
+    AppAction.editContact(i);
   }
 
   handleDelete(i, j) {
@@ -30,7 +30,7 @@ export default class Movie extends React.Component {
         <td>{this.props.contact.phone}</td>
         <td>
           <a href="#" className="btn btn-default" onClick={this.handleEdit.bind(this, this.props.contact.id)}>Edit</a>
-          <a href="#" className="btn btn-danger" onClick={this.handleDelete.bind(this,this.props.contact.id)}>Delete</a>
+          <a href="#" className="btn btn-danger" onClick={this.handleDelete.bind(this, this.props.contact.id)}>Delete</a>
         </td>
       </tr>
     );

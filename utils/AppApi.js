@@ -14,6 +14,10 @@ module.exports = {
         var ref = app.database().ref("contacts");
         var newPostRef = ref.push(contact);
     },
+    updateContact: function (contact) {
+        var ref = app.database().ref("contacts");
+        var newPostRef = ref.child(contact.id).update(contact);
+    },
     getContacts: function () {
         var ref = app.database().ref("contacts");
         ref.once("value", function (snapshot) {

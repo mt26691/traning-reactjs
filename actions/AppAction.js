@@ -8,6 +8,12 @@ var AppActions = {
             contact: contact
         })
     },
+    updateContact: function (contact) {
+        appDispatcher.handleViewAction({
+            actionType: AppConstants.UPDATE_CONTACT,
+            contact: contact
+        })
+    },
     receivedContact: function (contacts) {
         appDispatcher.handleViewAction({
             actionType: AppConstants.RECEIVED_CONTACTS,
@@ -18,6 +24,12 @@ var AppActions = {
         console.log(id);
         appDispatcher.handleViewAction({
             actionType: AppConstants.REMOVE_CONTACT,
+            id: id
+        })
+    },
+    editContact: function (id) {
+        appDispatcher.handleViewAction({
+            actionType: AppConstants.EDIT_CONTACT,
             id: id
         })
     }
