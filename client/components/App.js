@@ -14,6 +14,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(appStore.getContacts());
     this.state = {
       contacts: appStore.getContacts()
     };
@@ -37,6 +38,7 @@ class App extends React.Component {
         {this.state.contacts && <ContactList contacts={this.state.contacts} />}
       </div>);
   }
+
   _onChange() {
     this.setState({
       contacts: appStore.getContacts()

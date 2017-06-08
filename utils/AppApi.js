@@ -16,7 +16,7 @@ module.exports = {
     },
     getContacts: function () {
         var ref = app.database().ref("contacts");
-        ref.on("value", function (snapshot) {
+        ref.once("value", function (snapshot) {
             var contacts = [];
             snapshot.forEach(function (childSnapshot) {
                 var contact = {
