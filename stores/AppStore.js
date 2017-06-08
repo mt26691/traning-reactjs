@@ -23,6 +23,7 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     updateContact(contact) {
         var index = _contacts.findIndex(x => x.id === contact.id);
         _contacts.splice(index, 1,contact);
+        editContact = null;
 
     },
     getContacts: function () {
