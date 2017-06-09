@@ -11,15 +11,13 @@ import AppApi from '../../utils/AppApi';
 
 function getAppState() {
   return {
-    contacts: appStore.getContacts(),
-    contactToEdit: appStore.getContactForEdit()
+    notes: appStore.getNotes()
   };
 }
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(appStore.getContacts());
     this.state = getAppState();
 
     this._onChange = this._onChange.bind(this);
@@ -34,7 +32,7 @@ class App extends React.Component {
   }
 
   render() {
-
+    console.log(this.state.notes);
     return (
       <div>
         <div className="off-canvas-wrapper">

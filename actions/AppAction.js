@@ -2,10 +2,10 @@ var appDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 
 var AppActions = {
-    saveContact: function (contact) {
+    addNote: function (note) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.SAVE_CONTACT,
-            contact: contact
+            actionType: AppConstants.ADD_NOTE,
+            note: note
         })
     },
    

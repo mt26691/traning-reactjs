@@ -18,8 +18,7 @@ export default class AddNoteForm extends React.Component {
     var note = {
       text: this.refs.text.value.trim()
     }
-
-    AppActions.addNote(note);
+    AppAcion.addNote(note);
   }
 
   render() {

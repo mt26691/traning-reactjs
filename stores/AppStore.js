@@ -10,30 +10,11 @@ var CHANGE_EVENT = 'change';
 var _notes = [];
 
 var AppStore = assign({}, EventEmiiter.prototype, {
-    saveContact: function (contact) {
-        _contacts.push(contact);
+    addNote: function (note) {
+        _notes.push(note);
     },
-    setContactForEdit: function (id) {
-        editContact = _contacts.find(t => t.id == id);
-    },
-    getContactForEdit() {
-        return editContact;
-    },
-    updateContact(contact) {
-        var index = _contacts.findIndex(x => x.id === contact.id);
-        _contacts.splice(index, 1,contact);
-        editContact = null;
-
-    },
-    getContacts: function () {
-        return _contacts;
-    },
-    removeContact: function (id) {
-        var index = _contacts.findIndex(x => x.id === id);
-        _contacts.splice(index, 1);
-    },
-    setContacts: function (contacts) {
-        _contacts = contacts;
+    getNotes: function () {
+        return _notes;
     },
     emitChange: function () {
         this.emit('change');
@@ -51,9 +32,10 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
     var action = payload.action;
 
     switch (action.actionType) {
-        case AppConstants.SAVE_CONTACT:
-            AppStore.saveContact(action.contact);
-            AppApi.saveContact(action.contact);
+        case AppConstants.ADD_NOTE:
+            console.log(action.note);
+            AppStore.addNote(action.note);
+            // AppApi.saveContact(action.note);
             break;
         default:
             return true;
