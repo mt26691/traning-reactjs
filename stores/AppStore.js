@@ -7,8 +7,7 @@ var AppApi = require('../utils/AppApi');
 
 var CHANGE_EVENT = 'change';
 
-var _contacts = [];
-var editContact = null;
+var _notes = [];
 
 var AppStore = assign({}, EventEmiiter.prototype, {
     saveContact: function (contact) {
@@ -55,21 +54,6 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
         case AppConstants.SAVE_CONTACT:
             AppStore.saveContact(action.contact);
             AppApi.saveContact(action.contact);
-            break;
-        case AppConstants.RECEIVED_CONTACTS:
-            AppStore.setContacts(action.contacts);
-            break;
-        case AppConstants.REMOVE_CONTACT:
-            AppStore.getContact(action.id);
-            AppApi.removeContact(action.id);
-            break;
-        case AppConstants.EDIT_CONTACT:
-            var contact = AppStore.setContactForEdit(action.id);
-            break;
-        case AppConstants.UPDATE_CONTACT:
-            AppStore.updateContact(action.contact);
-
-            AppApi.updateContact(action.contact);
             break;
         default:
             return true;

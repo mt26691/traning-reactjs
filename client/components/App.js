@@ -6,9 +6,7 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
-import AddForm from './contact/AddForm';
-import EditForm from './contact/EditForm';
-import ContactList from './contact/ContactList';
+import AddNoteForm from './AddNoteForm';
 import AppApi from '../../utils/AppApi';
 
 function getAppState() {
@@ -39,10 +37,21 @@ class App extends React.Component {
 
     return (
       <div>
-        {this.state.contactToEdit == null && <AddForm />}
-        {this.state.contactToEdit != null && <EditForm contactToEdit={this.state.contactToEdit} />}
-        {this.state.contacts && <ContactList contacts={this.state.contacts} />}
-      </div>);
+        <div className="off-canvas-wrapper">
+          <div className="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+            <div className="off-canvas position-left reveal-for-large" data-off-canvas data-position="left">
+              <div className="row column">
+                <br />
+                <AddNoteForm />
+              </div>
+            </div>
+            <div className="off-canvas-content" data-off-canvas-content>
+            // NOTELIST
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   _onChange() {
