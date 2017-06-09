@@ -8,7 +8,12 @@ var AppActions = {
             note: note
         })
     },
-   
+    receivedNotes: function (data) {
+        appDispatcher.handleViewAction({
+            actionType: AppConstants.RECEIVED_NOTES,
+            notes: data
+        })
+    }
 };
 
 module.exports = AppActions;

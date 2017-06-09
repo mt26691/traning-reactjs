@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
 import AddNoteForm from './AddNoteForm';
+import NoteList from './NoteList';
 import AppApi from '../../utils/AppApi';
 
 function getAppState() {
@@ -44,7 +45,7 @@ class App extends React.Component {
               </div>
             </div>
             <div className="off-canvas-content" data-off-canvas-content>
-            // NOTELIST
+              {this.state.notes && <NoteList notes={this.state.notes} />}
             </div>
           </div>
         </div>

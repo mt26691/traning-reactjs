@@ -1,3 +1,4 @@
 module.exports ={
-	ADD_NOTE :"ADD_NOTE"
+	ADD_NOTE :"ADD_NOTE",
+	RECEIVED_NOTES :"RECEIVED_NOTES",
 }

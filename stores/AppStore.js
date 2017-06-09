@@ -13,6 +13,9 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     addNote: function (note) {
         _notes.push(note);
     },
+    setNotes: function (notes) {
+        _notes = notes;
+    },
     getNotes: function () {
         return _notes;
     },
@@ -35,7 +38,10 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
         case AppConstants.ADD_NOTE:
             console.log(action.note);
             AppStore.addNote(action.note);
-            // AppApi.saveContact(action.note);
+            AppApi.addNote(action.note);
+            break;
+        case AppConstants.RECEIVED_NOTES:
+            AppStore.setNotes(action.notes);
             break;
         default:
             return true;
