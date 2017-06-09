@@ -19,6 +19,9 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     getNotes: function () {
         return _notes;
     },
+    removeNote: function (noteId) {
+        _notes = _notes.filter(t => t._id.$oid != noteId);
+    },
     emitChange: function () {
         this.emit('change');
     },
@@ -42,6 +45,10 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
             break;
         case AppConstants.RECEIVED_NOTES:
             AppStore.setNotes(action.notes);
+            break;
+        case AppConstants.REMOVE_NOTE:
+            AppStore.removeNote(action.noteId);
+            AppApi.removeNote(action.noteId);
             break;
         default:
             return true;
