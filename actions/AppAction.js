@@ -8,13 +8,13 @@ var AppActions = {
             keyword: data.keyword
         })
     },
-    receivedNotes: function (data) {
+    receivedResults: function (data) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.RECEIVED_NOTES,
-            notes: data
+            actionType: AppConstants.RECEIVED_RESULTS,
+            results: data
         })
     }
-  
+
 };
 
 module.exports = AppActions;

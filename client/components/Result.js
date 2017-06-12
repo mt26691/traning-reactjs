@@ -13,8 +13,9 @@ export default class Result extends React.Component {
 
   render() {
     return (
-      <div className="col-md-12">
-      
+      <div>
+        <p className="content lead" dangerouslySetInnerHTML={{__html:this.props.result.Result}}>
+        </p>
       </div>
     );
   }

@@ -11,7 +11,8 @@ import SearchForm from './SearchForm';
 
 function getAppState() {
   return {
-    keyword: appStore.getSearchText()
+    keyword: appStore.getSearchText(),
+    results: appStore.getResults()
   };
 }
 class App extends React.Component {
@@ -32,7 +33,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.notes);
     return (
       <div className="container">
         <div className="row">
@@ -43,7 +43,7 @@ class App extends React.Component {
           </div>
           <div className="col-md-12">
             <SearchForm />
-            <SearchResults />
+            <SearchResults searchText={this.state.keyword} results={this.state.results} />
           </div>
         </div>
       </div>
