@@ -6,13 +6,12 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
-import AddNoteForm from './AddNoteForm';
-import NoteList from './NoteList';
-import AppApi from '../../utils/AppApi';
+import SearchResults from './SearchResults';
+import SearchForm from './SearchForm';
 
 function getAppState() {
   return {
-    notes: appStore.getNotes()
+    keyword: appStore.getSearchText()
   };
 }
 class App extends React.Component {
@@ -35,18 +34,16 @@ class App extends React.Component {
   render() {
     console.log(this.state.notes);
     return (
-      <div>
-        <div className="off-canvas-wrapper">
-          <div className="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-            <div className="off-canvas position-left reveal-for-large" data-off-canvas data-position="left">
-              <div className="row column">
-                <br />
-                <AddNoteForm />
-              </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="text-center">
+              <h1>Info Finder</h1>
             </div>
-            <div className="off-canvas-content" data-off-canvas-content>
-              {this.state.notes && <NoteList notes={this.state.notes} />}
-            </div>
+          </div>
+          <div className="col-md-12">
+            <SearchForm />
+            <SearchResults />
           </div>
         </div>
       </div>

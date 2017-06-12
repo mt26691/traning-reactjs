@@ -2,10 +2,10 @@ var appDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 
 var AppActions = {
-    addNote: function (note) {
+    search: function (data) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.ADD_NOTE,
-            note: note
+            actionType: AppConstants.SEARCH,
+            keyword: data.keyword
         })
     },
     receivedNotes: function (data) {
@@ -13,13 +13,8 @@ var AppActions = {
             actionType: AppConstants.RECEIVED_NOTES,
             notes: data
         })
-    },
-    removeNote: function (id) {
-        appDispatcher.handleViewAction({
-            actionType: AppConstants.REMOVE_NOTE,
-            noteId: id
-        })
     }
+  
 };
 
 module.exports = AppActions;
