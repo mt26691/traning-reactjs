@@ -10,14 +10,20 @@ export default class VideoList extends React.Component {
 
   constructor(props) {
     super(props);
-    
-  }
 
+  }
 
   render() {
     return (
       <div>
         <h1>You have {this.props.videos.length} video</h1>
+        <div className="row">
+          {
+            this.props.videos.map((video, index) => {
+              return <Video video={video} key={index} />
+            })
+          }
+        </div>
       </div>
     );
   }

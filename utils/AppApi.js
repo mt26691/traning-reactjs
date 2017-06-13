@@ -29,9 +29,9 @@ module.exports = {
             snapshot.forEach(function (childSnapshot) {
                 var video = {
                     id: childSnapshot.key,
-                    name: childSnapshot.val().title,
-                    email: childSnapshot.val().video_id,
-                    phone: childSnapshot.val().description,
+                    title: childSnapshot.val().title,
+                    video_id: childSnapshot.val().video_id,
+                    description: childSnapshot.val().description,
                 };
                 videos.push(video);
             });

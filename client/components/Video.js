@@ -12,10 +12,13 @@ export default class Video extends React.Component {
   }
 
   render() {
+    console.log(this.props.video);
+    var videoLink = `https://www.youtube.com/embed/${this.props.video.video_id}`;
     return (
-      <div>
-        {/*<p className="content lead" dangerouslySetInnerHTML={{__html:this.props.result.Result}}>
-        </p>*/}
+      <div className="col-md-8 col-md-offset-2">
+       <h4>{this.props.video.title}</h4>
+       <iframe width="360" height="285" src={videoLink} frameBorder="0" allowFullScreen></iframe>
+       <p>{this.props.video.description}</p>
       </div>
     );
   }
