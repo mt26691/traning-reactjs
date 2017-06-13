@@ -41,8 +41,8 @@ module.exports = {
         });
 
     },
-    removeContact: function (id) {
-        var ref = app.database().ref("contacts");
+    removeVideo: function (id) {
+        var ref = app.database().ref("videos");
         ref.child(id).remove();
     },
 }

@@ -12,11 +12,14 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     setVideos: function (data) {
         videos = data;
     },
-    setVideo:function(data){
+    setVideo: function (data) {
         videos.push(data);
     },
     getVideos: function () {
         return videos;
+    },
+    deleteVideo: function (videoId) {
+        videos = videos.filter(t => t.id != videoId);
     },
     emitChange: function () {
         this.emit('change');
@@ -39,6 +42,10 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
             break;
         case AppConstants.RECEIVED_VIDEOS:
             AppStore.setVideos(action.videos);
+            break;
+        case AppConstants.DELETE_VIDEO:
+            AppStore.deleteVideo(action.videoId);
+            AppApi.removeVideo(action.videoId);
             break;
         default:
             return true;

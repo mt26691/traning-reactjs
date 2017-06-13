@@ -20,6 +20,13 @@ var AppActions = {
             actionType: AppConstants.RECEIVED_VIDEOS,
             videos: data
         })
+    },
+    deleteVideo:function(videoId)
+    {
+          appDispatcher.handleViewAction({
+            actionType: AppConstants.DELETE_VIDEO,
+            videoId: videoId
+        })
     }
 
 };
