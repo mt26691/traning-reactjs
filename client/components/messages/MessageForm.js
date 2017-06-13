@@ -15,30 +15,23 @@ export default class MessageForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    var contact = {
-      name: this.refs.name.value.trim(),
-      phone: this.refs.phone.value.trim(),
-      email: this.refs.email.value.trim(),
-    }
 
-    AppAcion.saveContact(contact);
+    this.props.emit("MessageAdded", {
+      timeStamp: Date.now(),
+      text: this.refs.text.value.trim()
+    });
+    
+    this.refs.text.value = "";
   }
 
   render() {
     return (
       <div className="well">
-        <h3>Add contact</h3>
+        <h3>Message Form</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <input type="text" className="form-control" ref="name" placeholder="Name..." />
+            <input type="text" className="form-control" ref="text" placeholder="Please type a message..." />
           </div>
-          <div className="form-group">
-            <input type="text" className="form-control" ref="phone" placeholder="Phone..." />
-          </div>
-          <div className="form-group">
-            <input type="text" className="form-control" ref="email" placeholder="Email..." />
-          </div>
-          <button className="btn btn-primary btn-block" type="submit">Add</button>
         </form>
       </div>
     );
