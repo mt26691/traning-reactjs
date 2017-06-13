@@ -6,20 +6,27 @@ var assign = require("object-assign");
 var AppApi = require('../utils/AppApi');
 
 var CHANGE_EVENT = 'change';
-var videos = [];
+var workouts = [];
 
+var _showForm = false;
 var AppStore = assign({}, EventEmiiter.prototype, {
-    setVideos: function (data) {
-        videos = data;
+    showForm: function () {
+        _showForm = true;
     },
-    setVideo: function (data) {
-        videos.push(data);
+    getShowForm: function () {
+        return _showForm;
     },
-    getVideos: function () {
-        return videos;
+    addWorkout: function (workout) {
+        workouts.push(workout);
     },
-    deleteVideo: function (videoId) {
-        videos = videos.filter(t => t.id != videoId);
+    removeWorkout: function (id) {
+        workouts = workouts.filter(t => t.id !== id);
+    },
+    setWorkouts: function (newData) {
+        workouts = newData;
+    },
+    getWorkouts: function () {
+        return workouts;
     },
     emitChange: function () {
         this.emit('change');
@@ -36,16 +43,19 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
     var action = payload.action;
 
     switch (action.actionType) {
-        case AppConstants.SAVE_VIDEO:
-            AppStore.setVideo(action.video);
-            AppApi.saveVideo(action.video);
+        case AppConstants.SHOW_FORM:
+            AppStore.showForm();
             break;
-        case AppConstants.RECEIVED_VIDEOS:
-            AppStore.setVideos(action.videos);
+        case AppConstants.ADD_WORKOUT:
+            AppStore.addWorkout(action.workout);
+            AppApi.addWorkout(action.workout);
             break;
-        case AppConstants.DELETE_VIDEO:
-            AppStore.deleteVideo(action.videoId);
-            AppApi.removeVideo(action.videoId);
+        case AppConstants.RECEIVED_WORKOUTS:
+            AppStore.setWorkouts(action.workouts);
+            break;
+        case AppConstants.DELETE_WORKOUT:
+            AppStore.removeWorkout(action.id);
+            AppApi.removeWorkout(action.id);
             break;
         default:
             return true;

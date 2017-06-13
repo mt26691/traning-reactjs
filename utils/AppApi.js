@@ -10,39 +10,29 @@ var app = firebase.initializeApp({
 });
 
 module.exports = {
-    saveContact: function (contact) {
-        var ref = app.database().ref("contacts");
-        var newPostRef = ref.push(contact);
+    addWorkout: function (workout) {
+        var workouts = JSON.parse(localStorage.getItem("workouts"));
+        if (workouts == null) {
+            workouts = [];
+        }
+        workouts.push(workout);
+        console.log(workouts);
+        localStorage.setItem("workouts", JSON.stringify(workouts));
     },
-    saveVideo: function (video) {
-        var ref = app.database().ref("videos");
-        var newPostRef = ref.push(video);
+    getWorkouts: function () {
+        var workouts = JSON.parse(localStorage.getItem("workouts"));
+        if (workouts == null) {
+            workouts = [];
+        }
+        AppActions.receivedWorkouts(workouts);
     },
-    updateContact: function (contact) {
-        var ref = app.database().ref("contacts");
-        var newPostRef = ref.child(contact.id).update(contact);
-    },
-    getVideos: function () {
-        var ref = app.database().ref("videos");
-        ref.once("value", function (snapshot) {
-            var videos = [];
-            snapshot.forEach(function (childSnapshot) {
-                var video = {
-                    id: childSnapshot.key,
-                    title: childSnapshot.val().title,
-                    video_id: childSnapshot.val().video_id,
-                    description: childSnapshot.val().description,
-                };
-                videos.push(video);
-            });
-            AppActions.receivedVideos(videos);
-        }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        });
+    removeWorkout: function (id) {
+        var workouts = JSON.parse(localStorage.getItem("workouts"));
+        if (workouts == null) {
+            workouts = [];
+        }
+        workouts = workouts.filter(t => t.id !== id);
+        localStorage.setItem("workouts", JSON.stringify(workouts));
 
-    },
-    removeVideo: function (id) {
-        var ref = app.database().ref("videos");
-        ref.child(id).remove();
     },
 }

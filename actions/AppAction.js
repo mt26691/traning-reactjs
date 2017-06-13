@@ -2,30 +2,27 @@ var appDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 
 var AppActions = {
-    search: function (data) {
+    showForm: function () {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.SEARCH,
-            keyword: data.keyword
+            actionType: AppConstants.SHOW_FORM
         })
     },
-    saveVideo: function (video) {
+    addWorkOut: function (workout) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.SAVE_VIDEO,
-            video: video
+            actionType: AppConstants.ADD_WORKOUT,
+            workout: workout
         })
     },
-
-    receivedVideos: function (data) {
+    receivedWorkouts: function (workouts) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.RECEIVED_VIDEOS,
-            videos: data
+            actionType: AppConstants.RECEIVED_WORKOUTS,
+            workouts: workouts
         })
     },
-    deleteVideo:function(videoId)
-    {
-          appDispatcher.handleViewAction({
-            actionType: AppConstants.DELETE_VIDEO,
-            videoId: videoId
+    deleteWorkout: function (id) {
+        appDispatcher.handleViewAction({
+            actionType: AppConstants.DELETE_WORKOUT,
+            id: id
         })
     }
 

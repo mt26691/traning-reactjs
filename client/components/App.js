@@ -6,12 +6,13 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
-import VideoList from './VideoList';
+import WorkoutList from './WorkoutList';
 import AddForm from './AddForm';
 
 function getAppState() {
   return {
-    videos: appStore.getVideos()
+    showForm: appStore.getShowForm(),
+    workouts: appStore.getWorkouts()
   };
 }
 class App extends React.Component {
@@ -31,22 +32,27 @@ class App extends React.Component {
     appStore.removeChangeListener(this._onChange);
   }
 
+  onShowFormClick(e) {
+    e.preventDefault();
+    appActions.showForm();
+  }
   render() {
+    console.log(this.state.workouts);
+    var form = "";
+    if (this.state.showForm) {
+      var form = <AddForm />;
+    }
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="text-center">
-              <h1>Youtube Gallery</h1>
-            </div>
-          </div>
-          <div className="col-md-12">
-            <AddForm />
-            {
-              this.state.videos.length > 0 && <VideoList videos={this.state.videos} />
-            }
-          </div>
-        </div>
+      <div>
+        <h1 className="text-center page-header">
+          Workout logger
+        </h1>
+        <a href="#" className="btn btn-primary btn-block" onClick={this.onShowFormClick.bind(this)}>Add workout</a>
+        <br />
+        {form}
+        Add
+        <br />
+        <WorkoutList workouts={this.state.workouts} />
       </div>
     );
   }

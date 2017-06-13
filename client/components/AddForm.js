@@ -14,13 +14,14 @@ export default class AddForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    var video = {
-      title: this.refs.title.value.trim(),
-      video_id: this.refs.video_id.value.trim(),
-      description: this.refs.description.value.trim(),
+    var workout = {
+      id: Date.now(),
+      type: this.refs.type.value.trim(),
+      minutes: this.refs.minutes.value.trim(),
+      miles: this.refs.miles.value.trim(),
+      date: new Date()
     }
-    
-    AppAcion.saveVideo(video);
+    AppAcion.addWorkOut(workout);
   }
 
   render() {
@@ -30,21 +31,20 @@ export default class AddForm extends React.Component {
         <form onSubmit={this.onSubmit}>
           <div className="row">
             <div className="form-group">
-              <label>Video Title
-              </label>
-              <input type="text" className="form-control" ref="title" placeholder="Enter Title..." />
+              <select className="form-control" ref="type">
+                <option value="Jogging">Jogging</option>
+                <option value="WeightLifting">Weight Lifting</option>
+                <option value="Yoga">Yoga</option>
+                <option value="Others">Others</option>
+              </select>
             </div>
             <div className="form-group">
-              <label>Video ID
-              </label>
-              <input type="text" className="form-control" ref="video_id" placeholder="Enter Id..." />
+              <input type="text" className="form-control" ref="minutes" placeholder="minutes" />
             </div>
             <div className="form-group">
-              <label>Description
-              </label>
-              <textarea name="description" id="description" ref="description" className="form-control" cols="30" rows="10"></textarea>
+              <input type="text" className="form-control" ref="miles" placeholder="miles" />
             </div>
-            <button className="btn btn-primary" type="submit">Add</button>
+            <button className="btn btn-info btn-block" type="submit">Log Workout</button>
           </div>
         </form>
       </div>
