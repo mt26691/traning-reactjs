@@ -11,6 +11,7 @@ import MessageList from './messages/MessageList';
 import MessageForm from './messages/MessageForm';
 import UserList from './users/UserList';
 import UserForm from './users/UserForm';
+import io from 'socket.io-client';
 
 function getAppState() {
   return {
@@ -29,12 +30,20 @@ class App extends React.Component {
 
   componentDidMount() {
     appStore.addChangeListener(this._onChange);
+    this.socket = io('http://localhost:3000/');
+    this.socket.on("connect", this.connect.bind(this));
   }
 
   componentWillUnmount() {
     appStore.removeChangeListener(this._onChange);
   }
 
+  connect() {
+    this.setState({
+      status: "connected"
+    });
+    console.log("connected " + this.socket.id);
+  }
   render() {
 
     return (
