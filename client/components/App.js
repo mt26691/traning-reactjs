@@ -6,13 +6,12 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
-import SearchResults from './SearchResults';
-import SearchForm from './SearchForm';
+import VideoList from './VideoList';
+import AddForm from './AddForm';
 
 function getAppState() {
   return {
-    keyword: appStore.getSearchText(),
-    results: appStore.getResults()
+    videos: appStore.getVideos()
   };
 }
 class App extends React.Component {
@@ -38,12 +37,14 @@ class App extends React.Component {
         <div className="row">
           <div className="col-md-12">
             <div className="text-center">
-              <h1>Info Finder</h1>
+              <h1>Youtube Gallery</h1>
             </div>
           </div>
           <div className="col-md-12">
-            <SearchForm />
-            <SearchResults searchText={this.state.keyword} results={this.state.results} />
+            <AddForm />
+            {
+              this.state.videos.length > 0 && <VideoList videos={this.state.videos} />
+            }
           </div>
         </div>
       </div>

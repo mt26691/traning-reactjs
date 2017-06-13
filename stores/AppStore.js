@@ -6,22 +6,14 @@ var assign = require("object-assign");
 var AppApi = require('../utils/AppApi');
 
 var CHANGE_EVENT = 'change';
-
-var _keyword = "";
-var results = [];
+var videos = [];
 
 var AppStore = assign({}, EventEmiiter.prototype, {
-    setSearchText: function (keyword) {
-        _keyword = keyword;
+    setVideos: function (data) {
+        videos = data;
     },
-    getSearchText: function () {
-        return _keyword;
-    },
-    setResults: function (data) {
-        results = data;
-    },
-    getResults: function () {
-        return results;
+    getVideos: function () {
+        return videos;
     },
     emitChange: function () {
         this.emit('change');
@@ -29,7 +21,6 @@ var AppStore = assign({}, EventEmiiter.prototype, {
     addChangeListener: function (callback) {
         this.on('change', callback);
     },
-
     removeChangeListener: function (callback) {
         this.removeListener('change', callback);
     }
@@ -39,12 +30,12 @@ AppStore.dispatcherIndex = appDispatcher.register(function (payload) {
     var action = payload.action;
 
     switch (action.actionType) {
-        case AppConstants.SEARCH:
-            AppApi.searchText(action.keyword);
-            AppStore.setSearchText(action.keyword);
+        case AppConstants.SAVE_VIDEO:
+            AppStore.setVideos(action.video);
+            AppApi.saveVideo(action.video);
             break;
-        case AppConstants.RECEIVED_RESULTS:
-            AppStore.setResults(action.results);
+        case AppConstants.RECEIVED_VIDEOS:
+            AppStore.setVideos(action.videos);
             break;
         default:
             return true;

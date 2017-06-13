@@ -8,10 +8,17 @@ var AppActions = {
             keyword: data.keyword
         })
     },
-    receivedResults: function (data) {
+    saveVideo: function (video) {
         appDispatcher.handleViewAction({
-            actionType: AppConstants.RECEIVED_RESULTS,
-            results: data
+            actionType: AppConstants.SAVE_VIDEO,
+            video: video
+        })
+    },
+
+    receivedVideos: function (data) {
+        appDispatcher.handleViewAction({
+            actionType: AppConstants.RECEIVED_VIDEOS,
+            videos: data
         })
     }
 

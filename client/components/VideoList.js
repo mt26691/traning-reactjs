@@ -4,18 +4,20 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import AppAcion from '../../actions/AppAction';
+import Video from './Video';
 
-export default class Result extends React.Component {
+export default class VideoList extends React.Component {
 
   constructor(props) {
     super(props);
+    
   }
+
 
   render() {
     return (
       <div>
-        <p className="content lead" dangerouslySetInnerHTML={{__html:this.props.result.Result}}>
-        </p>
+        <h1>You have {this.props.videos.length} video</h1>
       </div>
     );
   }
