@@ -31,7 +31,7 @@ class App extends React.Component {
     this.state = {
       status: "disconnected",
       messages: [{
-        timeStamp: Date.now,
+        timeStamp: Date.now(),
         text: "Welcome to sockchat"
       }],
       users: [],
@@ -80,7 +80,7 @@ class App extends React.Component {
           <UserList />
         </div>
         <div className="col-md-8">
-          <MessageList />
+          <MessageList {...this.state} />
           <MessageForm {...this.state} emit={this.emit} />
         </div>
       </div>);

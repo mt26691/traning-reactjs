@@ -5,42 +5,41 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import AppAcion from '../../../actions/AppAction';
 
-export default class AddForm extends React.Component {
+export default class Message extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onSubmit = this.onSubmit.bind(this);
 
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-    var contact = {
-      name: this.refs.name.value.trim(),
-      phone: this.refs.phone.value.trim(),
-      email: this.refs.email.value.trim(),
-    }
-
-    AppAcion.saveContact(contact);
   }
 
   render() {
+    const { message } = this.props;
+    var formattedTime = this.formatTime(message.timeStamp);
     return (
-      <div className="well">
-        <h3>Add contact</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <input type="text" className="form-control" ref="name" placeholder="Name..." />
-          </div>
-           <div className="form-group">
-            <input type="text" className="form-control" ref="phone" placeholder="Phone..." />
-          </div>
-           <div className="form-group">
-            <input type="text" className="form-control" ref="email" placeholder="Email..." />
-          </div>
-          <button className="btn btn-primary btn-block" type="submit">Add</button>
-        </form>
+      <div className="message">
+        <strong>
+        </strong>
+        {formattedTime} - {message.text}
       </div>
     );
+  }
+
+  formatTime(timeStamp) {
+    var dt = new Date(timeStamp * 1000);
+    var hours = dt.getHours();
+    var minutes = dt.getMinutes()
+    var seconds = dt.getSeconds();
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    return hours + ":" + minutes + ":" + seconds;
   }
 }

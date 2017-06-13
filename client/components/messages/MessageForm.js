@@ -26,8 +26,7 @@ export default class MessageForm extends React.Component {
 
   render() {
     return (
-      <div className="well">
-        <h3>Message Form</h3>
+      <div>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <input type="text" className="form-control" ref="text" placeholder="Please type a message..." />
