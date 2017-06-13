@@ -15,20 +15,23 @@ export default class UserForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    var contact = {
-      name: this.refs.name.value.trim(),
-      phone: this.refs.phone.value.trim(),
-      email: this.refs.email.value.trim(),
-    }
+    var name = this.refs.name.value.trim()
+    this.props.setUser({ name: name });
+    
+    this.props.emit("userJoined", {
+      name: name
+    });
 
-    AppAcion.saveContact(contact);
+    this.refs.name.value = "";
   }
 
   render() {
     return (
       <div className="well">
-        <h3>User Form</h3>
-
+        <h3>Chat Login</h3>
+        <form onSubmit={this.onSubmit}>
+          <input type="text" className="form-control" ref="name" placeholder="Choose  a username" />
+        </form>
       </div>
     );
   }

@@ -13,17 +13,35 @@ io.sockets.on("connection", function (socket) {
     socket.on("MessageAdded", function (payload) {
         console.log(payload);
         var newMessage = {
-            timeStamp: payload.timeStamp, text: payload.text
+            timeStamp: payload.timeStamp, text: payload.text, user: payload.user
         }
 
         io.emit("MessageAdded", newMessage);
     });
 
+    socket.on("userJoined", function (payload) {
+        var newUser = {
+            id: this.id,
+            name: payload.name
+        }
+
+        users.push(newUser);
+
+        io.emit("userJoined", users);
+        console.log("user joined " + payload.name);
+    });
+
+
     socket.once("disconnect", function () {
-        connections.splice(connections.indexOf(socket), 1);
-        socket.disconnect();
-        console.log("Disconnected: %s sockets connected", connections.length);
-        io.emit("disconnect")
+      for(var i = 0;i < users.length;i++){
+			if(users[i].id == this.id){
+				users.splice(i, 1);
+			}
+		}
+		connections.splice(connections.indexOf(socket), 1);
+		socket.disconnect();
+		console.log('Disconnected: %s sockets connected', connections.length);
+		io.emit('disconnect', users);
     });
     connections.push(socket);
     console.log("connected: %s sockets connected", connections.length);

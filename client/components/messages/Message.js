@@ -15,9 +15,11 @@ export default class Message extends React.Component {
   render() {
     const { message } = this.props;
     var formattedTime = this.formatTime(message.timeStamp);
+    console.log(message);
     return (
       <div className="message">
         <strong>
+          {message.user}
         </strong>
         {formattedTime} - {message.text}
       </div>

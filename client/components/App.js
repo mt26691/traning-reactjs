@@ -38,13 +38,20 @@ class App extends React.Component {
       user: ''
     }
   }
-
+  setUser(user) {
+    this.setState({ user: user });
+  }
   componentWillMount() {
     this.socket = io('http://localhost:3000/');
     this.socket.on("connect", this.connect.bind(this));
+     this.socket.on("disconnect", this.disconnect.bind(this));
     this.socket.on("MessageAdded", this.onMessageAdded.bind(this));
-  }
+    this.socket.on("userJoined", this.onUserJoined.bind(this));
 
+  }
+  onUserJoined(data) {
+    this.setState({ users: data });
+  }
   componentDidMount() {
     appStore.addChangeListener(this._onChange);
   }
@@ -60,9 +67,10 @@ class App extends React.Component {
     console.log("connected " + this.socket.id);
   }
 
-  disconnet() {
+  disconnect(users) {
     this.setState({
-      status:"disconnected"
+      users: users,
+      status: "disconnected"
     });
   }
   onMessageAdded(message) {
@@ -73,17 +81,21 @@ class App extends React.Component {
     this.socket.emit(event, payload);
   }
   render() {
-    console.log(this.state.messages);
-    return (
-      <div className="row">
-        <div className="col-md-4">
-          <UserList />
-        </div>
-        <div className="col-md-8">
-          <MessageList {...this.state} />
-          <MessageForm {...this.state} emit={this.emit} />
-        </div>
-      </div>);
+    if (this.state.user == "") {
+      return <UserForm emit={this.emit} setUser={this.setUser.bind(this)} />
+    }
+    else {
+      return (
+        <div className="row">
+          <div className="col-md-4">
+            <UserList {...this.state} />
+          </div>
+          <div className="col-md-8">
+            <MessageList {...this.state} />
+            <MessageForm {...this.state} emit={this.emit} />
+          </div>
+        </div>);
+    }
   }
 
   _onChange() {
