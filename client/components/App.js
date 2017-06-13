@@ -6,15 +6,15 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 var appActions = require('../../actions/AppAction');
 var appStore = require("../../stores/AppStore");
-import AddForm from './contact/AddForm';
-import EditForm from './contact/EditForm';
-import ContactList from './contact/ContactList';
 import AppApi from '../../utils/AppApi';
+import MessageList from './messages/MessageList';
+import MessageForm from './messages/MessageForm';
+import UserList from './users/UserList';
+import UserForm from './users/UserForm';
 
 function getAppState() {
   return {
-    contacts: appStore.getContacts(),
-    contactToEdit: appStore.getContactForEdit()
+
   };
 }
 class App extends React.Component {
@@ -38,10 +38,14 @@ class App extends React.Component {
   render() {
 
     return (
-      <div>
-        {this.state.contactToEdit == null && <AddForm />}
-        {this.state.contactToEdit != null && <EditForm contactToEdit={this.state.contactToEdit} />}
-        {this.state.contacts && <ContactList contacts={this.state.contacts} />}
+      <div className="row">
+        <div className="col-md-4">
+          <UserList />
+        </div>
+        <div className="col-md-8">
+          <MessageList />
+          <MessageForm />
+        </div>
       </div>);
   }
 
